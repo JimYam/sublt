@@ -236,17 +236,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
 
 [[package]]
-name = "cargo-test"
-version = "0.1.0"
-dependencies = [
- "clap",
- "cumulus-primitives-core",
- "hex-literal",
- "sp-core",
- "sp-runtime",
-]
-
-[[package]]
 name = "cc"
 version = "1.0.73"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2194,6 +2183,17 @@ name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
+
+[[package]]
+name = "sublt"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "cumulus-primitives-core",
+ "hex-literal",
+ "sp-core",
+ "sp-runtime",
+]
 
 [[package]]
 name = "substrate-bip39"

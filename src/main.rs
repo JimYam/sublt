@@ -24,38 +24,28 @@ pub struct GetSs58Command {
     #[clap(flatten)]
     pub id: IdParams,
     #[allow(missing_docs)]
-    #[clap(long)]
+    #[clap(long, value_name = "Ss58AddressFormat (u16)")]
     pub dest_format: u16,
 }
 
 #[derive(Debug, Parser)]
 pub struct GetAccountIdCommand {
     #[allow(missing_docs)]
-    #[clap(long)]
+    #[clap(long, value_name = "Ss58Address")]
     pub ss58_address: String,
 }
 
 #[derive(Debug, Clone, Args)]
 pub struct IdParams {
     #[allow(missing_docs)]
-    #[clap(long)]
+    #[clap(long, value_name = "Parachain Id (u32)")]
     para_id: Option<u32>,
     #[allow(missing_docs)]
-    #[clap(long)]
+    #[clap(long, value_name = "Account ID (hex)")]
     account_id: Option<AccountId32>,
     #[allow(missing_docs)]
-    #[clap(long)]
+    #[clap(long, value_name = "Ss58Address")]
     ss58_address: Option<String>,
-}
-
-#[derive(Debug, Clone, Args, Default)]
-pub struct Ss58Params {
-    #[allow(missing_docs)]
-    #[clap(long)]
-    ss58: String,
-    #[allow(missing_docs)]
-    #[clap(long)]
-    from_format: u16,
 }
 
 #[derive(Debug, Parser)]
