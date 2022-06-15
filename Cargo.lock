@@ -2191,6 +2191,7 @@ dependencies = [
  "clap",
  "cumulus-primitives-core",
  "hex-literal",
+ "polkadot-parachain",
  "sp-core",
  "sp-runtime",
 ]

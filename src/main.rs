@@ -8,6 +8,7 @@ use sp_core::crypto::Ss58AddressFormat;
 use sp_core::crypto::Ss58Codec;
 use sp_runtime::traits::AccountIdConversion;
 use sp_runtime::AccountId32;
+use polkadot_parachain::primitives::Sibling;
 #[derive(Debug, clap::Subcommand)]
 pub enum Subcommand {
     #[allow(missing_docs)]
@@ -41,6 +42,9 @@ pub struct IdParams {
     #[clap(long, value_name = "Parachain Id (u32)")]
     para_id: Option<u32>,
     #[allow(missing_docs)]
+    #[clap(long, value_name = "Sibling Id (u32)")]
+    sibling_id: Option<u32>,
+    #[allow(missing_docs)]
     #[clap(long, value_name = "Account ID (hex)")]
     account_id: Option<AccountId32>,
     #[allow(missing_docs)]
@@ -69,9 +73,23 @@ fn main() {
             Subcommand::GetSs58(x) => {
                 let dest_format = x.dest_format;
 
+                if x.id.sibling_id.is_some()
+                    && x.id.account_id.is_none()
+                    && x.id.ss58_address.is_none()
+                    && x.id.para_id.is_none()
+                {
+                    let account_id: AccountId32 =
+                        Sibling::from(x.id.sibling_id.unwrap()).into_account();
+                    let ss58 = account_id
+                        .to_ss58check_with_version(Ss58AddressFormat::custom(dest_format));
+                    println!("ss58 address: {:?}", ss58);
+                    return;
+                }
+
                 if x.id.para_id.is_some()
                     && x.id.account_id.is_none()
                     && x.id.ss58_address.is_none()
+                    && x.id.sibling_id.is_none()
                 {
                     let account_id: AccountId32 =
                         ParaId::from(x.id.para_id.unwrap()).into_account();
@@ -84,6 +102,7 @@ fn main() {
                 if x.id.account_id.is_some()
                     && x.id.para_id.is_none()
                     && x.id.ss58_address.is_none()
+                    && x.id.sibling_id.is_none()
                 {
                     let ss58 =
                         x.id.account_id
@@ -96,6 +115,7 @@ fn main() {
                 if x.id.ss58_address.is_some()
                     && x.id.para_id.is_none()
                     && x.id.account_id.is_none()
+                    && x.id.sibling_id.is_none()
                 {
                     let (account_id, format) =
                         AccountId32::from_string_with_version(x.id.ss58_address.unwrap().as_str())

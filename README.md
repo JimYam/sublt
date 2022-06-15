@@ -3,6 +3,8 @@
 ```commandline
 // Generate the SS58 address for the specific chain based on the para id
 ./sublt get-ss58 --para-id xx --dest-format xx
+// Generate the SS58 address for the specific chain based on the sibling id
+./sublt get-ss58 --sibling-id xx --dest-format xx
 // Generate the SS58 address for the specific chain based on the account id
 ./sublt get-ss58 --account-id xx --dest-format xx
 // Generate the SS58 address for the specific chain based on the ss58 address
